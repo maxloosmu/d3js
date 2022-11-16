@@ -1,0 +1,245 @@
+width: window.innerWidth
+
+https://developer.mozilla.org/en-US/docs/Web/API/window/innerWidth
+The read-only Window property innerWidth returns the interior width of the window in pixels. This includes the width of the vertical scroll bar, if one is present.
+More precisely, innerWidth returns the width of the window's layout viewport. 
+If you need to obtain the width of the window minus the scrollbar and borders, use the root <html> element's clientWidth property instead.
+The innerWidth property is available on any window or object that behaves like a window, such as a frame or tab. 
+--------------------------------------
+--------------------------------------
+return Object.assign(target, obj);
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+const returnedTarget = Object.assign(target, source);
+console.log(target);
+// expected output: Object { a: 1, b: 4, c: 5 }
+console.log(returnedTarget === target);
+// expected output: true
+The Object.assign() method copies all enumerable own properties from one or more source objects to a target object. It returns the modified target object. 
+--------------------------------------
+--------------------------------------
+let nodes = d3.hierarchy((data), (d) => d.andOr.children);
+
+2017 D3.js in Action
+6.2 Working with hierarchical data
+In order to make hierarchical data visualization products, we need hierarchical data.  While hierarchical data is everywhere, D3 expects it in a particular format for its hierarchical layouts. That formatting is accomplished by using d3.hierarchy and passing to d3.hierarchy a hierarchical JavaScript object along with settings for how the child nodes are accessed and any numerical value assigned to the nodes.
+--------------------------------------
+--------------------------------------
+const treemap = d3.tree()
+
+2017 D3.js in Action
+6.4 Trees
+Another way to show hierarchical data is to lay it out like a family tree, with the parent nodes connected to the child nodes in a dendrogram (figure 6.9).
+6.4.1 Drawing a dendrogram
+The prefix dendro means “tree,” and in D3 the layout is d3.tree. It follows much the same setup as the pack layout, except that to draw the lines connecting the nodes, we need to use svg:line or svg:path elements. We process the data using d3.nest and d3.hierarchy in exactly the same manner as we do for the circle pack, and then use the code in the following listing to draw our first dendrogram.
+--------------------------------------
+--------------------------------------
+      const treemap = d3.tree()
+        .size([width, height]);
+
+https://github.com/d3/d3-hierarchy/blob/main/README.md#tree_size
+# tree.size([size])
+If size is specified, sets this tree layout’s size to the specified two-element array of numbers [width, height] and returns this tree layout. If size is not specified, returns the current layout size, which defaults to [1, 1]. A layout size of null indicates that a node size will be used instead. The coordinates x and y represent an arbitrary coordinate system; for example, to produce a radial layout, a size of [360, radius] corresponds to a breadth of 360° and a depth of radius.
+--------------------------------------
+--------------------------------------
+      nodes.each((d) => {
+        if (d.x > x1) x1 = d.x;
+        if (d.x < x0) x0 = d.x;
+      });
+
+https://github.com/d3/d3-hierarchy/blob/main/README.md#node_each
+# node.each(function[, that]) · Source, Examples
+Invokes the specified function for node and each descendant in breadth-first order, such that a given node is only visited if all nodes of lesser depth have already been visited, as well as all preceding nodes of the same depth. The specified function is passed the current descendant, the zero-based traversal index, and this node. If that is specified, it is the this context of the callback.
+
+https://observablehq.com/@d3/visiting-a-d3-hierarchy#each
+node.each, eachBefore, eachAfter
+node.each traverses the tree from that node, repeatedly calling a function on each descendant node. It uses level order (also called breadth-first order), meaning it will first visit the root (depth = 0), then all the children of the root (depth = 1), then grand children (depth = 2), and so on.
+--------------------------------------
+--------------------------------------
+.attr('viewBox', [0, 0, width, height]);
+
+https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox
+The viewBox attribute defines the position and dimension, in user space, of an SVG viewport.
+The value of the viewBox attribute is a list of four numbers: min-x, min-y, width and height. The numbers, which are separated by whitespace and/or a comma, specify a rectangle in user space which is mapped to the bounds of the viewport established for the associated SVG element (not the browser viewport).
+You can use this attribute with the following SVG elements:
+    <marker>
+    <pattern>
+    <svg>
+    <symbol>
+    <view>
+--------------------------------------
+--------------------------------------
+const g = svg.append('g')
+https://www.tutorialsteacher.com/d3js/create-svg-elements-in-d3js
+
+var g = svg.append('g')
+var ellipse = g.append("ellipse")
+g.append("text")
+You might notice that we have introduced a new <g> group element here.
+The <g> element is used when you would like to group certain SVG elements together. In our case, we are using <g> to hold our <ellipse> and <text> elements together. The group element comes in handy for applying transformations so that the transformations are applied to all the child elements of a group. 
+--------------------------------------
+--------------------------------------
+.attr('transform', `translate(${nodes.x / (nodes.height + 1)},0)`);
+
+https://www.tutorialspoint.com/d3js/d3js_svg_transformation.htm#
+Transformation Using D3.js
+To create SVG using D3.js, let us follow the steps given below.
+Step 1 − Create a container to hold the SVG image as explained below.
+<div id = "svgcontainer"></div>
+Step 2 − Create a SVG image as explained below.
+var width = 300;
+var height = 300;
+var svg = d3.select("#svgcontainer")
+   .append("svg")
+   .attr("width", width)
+   .attr("height", height);
+Step 3 − Create a SVG group element and set translate and rotate attributes.
+var group = svg.append("g").attr("transform", "translate(60, 60) rotate(30)");
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate
+The translate() CSS function repositions an element in the horizontal and/or vertical directions. Its result is a <transform-function> data type. 
+transform: translate(0);
+transform: translate(42px, 18px);
+transform: translate(-2.1rem, -2ex);
+transform: translate(3ch, 3mm);
+This transformation is characterized by a two-dimensional vector. Its coordinates define how much the element moves in each direction. 
+/* Single <length-percentage> values */
+transform: translate(200px);
+transform: translate(50%);
+/* Double <length-percentage> values */
+transform: translate(100px, 200px);
+transform: translate(100px, 50%);
+transform: translate(30%, 200px);
+transform: translate(30%, 50%);
+Single <length-percentage> values
+    This value is a <length> or <percentage> representing the abscissa (horizontal, x-coordinate) of the translating vector. The ordinate (vertical, y-coordinate) of the translating vector will be set to 0. For example, translate(2px) is equivalent to translate(2px, 0). A percentage value refers to the width of the reference box defined by the transform-box property.
+Double <length-percentage> values
+    This value describes two <length> or <percentage> values representing both the abscissa (x-coordinate) and the ordinate (y-coordinate) of the translating vector. A percentage as first value refers to the width, as second part to the height of the reference box defined by the transform-box property.
+--------------------------------------
+--------------------------------------
+d3.select(this).raise();
+
+https://github.com/d3/d3-selection#selection_raise
+# selection.raise() · Source
+Re-inserts each selected element, in order, as the last child of its parent. Equivalent to:
+selection.each(function() {
+  this.parentNode.appendChild(this);
+});
+--------------------------------------
+--------------------------------------
+d3.select(this).raise();
+
+https://stackoverflow.com/questions/39607389/what-does-d3-selectthis-return
+Somewhat duplicative of the comments, but the reason is that d3.select returns a d3 selection. Each selection is a different object, even if you select the same DOM node. The following shows the difference:
+var container = d3.select("body").node();
+var sel1 = d3.select(container);
+var sel2 = d3.select(container);
+console.log(sel1 === sel2);               // false
+console.log(sel1.node() === sel2.node()); // true
+
+2017 D3.js in Action
+3.2 Interactive style and DOM
+Creating interactive data visualization is necessary for your users to deal with large and complex datasets. And the key to building interactivity into your D3 projects is the use of events, which define behaviors based on user activity. After you learn how to make your elements interactive, you’ll need to understand D3 transitions, which allow you to animate the change from one color or size to another. With that in place, you’ll turn to learning how to make changes to an element’s position in the DOM so that you can draw your graphics properly. Finally, we’ll look more closely at color, which you’ll use often in response to user interaction.
+3.2.3 DOM manipulation
+Because these visual elements and buttons are all living in the DOM, it’s important to know how to access and work with them both with D3 and using built-in JavaScript functionality.
+Although D3 selections are extremely powerful, you sometimes want to deal specifically with the DOM element that’s bound to the data. These DOM elements come with a rich set of built-in functionality in JavaScript.  Getting access to the actual DOM element in the selection can be accomplished in one of two ways:
+1 Using this in the inline functions (cannot be used with arrow functions)
+2 Using the .node() function
+Inline functions always have access to the DOM element along with the datapoint and array position of that datapoint in the bound data. The DOM element, in this case, is represented by the this context within the scope of the function. That context isn’t available in arrow functions. We can see it in action using the .each() function of a selection, which performs the same code for each element in a selection. We’ll make a selection of one of our circles and then use .each() to send d, i, and this to the console to see what each corresponds to (which should look similar to the results in figure 3.7).
+--------------------------------------
+--------------------------------------
+      function drag() {
+        svg.call(d3.drag()
+          .on('start', dragStart)
+          .on('drag', dragDo)
+          .on('end', dragEnd));
+      }
+
+https://github.com/d3/d3-selection#selection_call
+# selection.call(function[, arguments…]) · Source
+Invokes the specified function exactly once, passing in this selection along with any optional arguments. Returns this selection. This is equivalent to invoking the function by hand but facilitates method chaining. For example, to set several styles in a reusable function:
+function name(selection, first, last) {
+  selection
+      .attr("first-name", first)
+      .attr("last-name", last);
+}
+Now say:
+d3.selectAll("div").call(name, "John", "Snow");
+This is roughly equivalent to:
+name(d3.selectAll("div"), "John", "Snow");
+The only difference is that selection.call always returns the selection and not the return value of the called function, name.
+
+https://github.com/d3/d3-drag#drag
+# d3.drag() · Source, Examples
+Creates a new drag behavior. The returned behavior, drag, is both an object and a function, and is typically applied to selected elements via selection.call.
+https://github.com/d3/d3-drag#api-reference
+API Reference
+This table describes how the drag behavior interprets native events:
+Event 	Listening Element 	Drag Event 	Default Prevented?
+mousedown⁵ 	selection 	start 		no¹
+mousemove² 	window¹ 	drag 		yes
+mouseup² 	window¹ 	end 		yes
+dragstart² 	window 		- 		yes
+selectstart² 	window 		- 		yes
+click³ 		window 		- 		yes
+touchstart 	selection 	start 		no⁴
+touchmove 	selection 	drag 		yes
+touchend 	selection 	end 		no⁴
+touchcancel 	selection 	end 		no⁴
+The propagation of all consumed events is immediately stopped. If you want to prevent some events from initiating a drag gesture, use drag.filter.
+¹ Necessary to capture events outside an iframe; see #9.
+² Only applies during an active, mouse-based gesture; see #9.
+³ Only applies immediately after some mouse-based gestures; see drag.clickDistance.
+⁴ Necessary to allow click emulation on touch input; see #9.
+⁵ Ignored if within 500ms of a touch gesture ending; assumes click emulation.
+
+https://www.tutorialsteacher.com/d3js/event-handling-in-d3js
+Events in D3
+As in all other libraries, D3 also supports built-in events and custom events. We can bind an event listener to any DOM element using d3.selection.on() method.
+Syntax:
+d3.selection.on(type[, listener[, capture]]);
+The on() method adds an event listener to all selected DOM elements. The first parameter is an event type as string such as "click", "mouseover" etc. The second parameter is a callback function which will be executed when an event occurs and the third optional parameter capture flag may be specified, which corresponds to the W3C useCapture flag. 
+--------------------------------------
+--------------------------------------
+      function zoom() {
+        svg.call(d3.zoom()
+          .extent([[0, 0], [width, height]])
+          .scaleExtent([1, 8])
+          .on('zoom', zoomed));
+      }
+
+https://github.com/d3/d3-zoom#zoom
+# d3.zoom() · Source, Examples
+Creates a new zoom behavior. The returned behavior, zoom, is both an object and a function, and is typically applied to selected elements via selection.call.
+
+https://github.com/d3/d3-zoom#zoom_extent
+# zoom.extent([extent]) · Source
+If extent is specified, sets the viewport extent to the specified array of points [[x0, y0], [x1, y1]], where [x0, y0] is the top-left corner of the viewport and [x1, y1] is the bottom-right corner of the viewport, and returns this zoom behavior. The extent may also be specified as a function which returns such an array; if a function, it is invoked for each selected element, being passed the current datum d, with the this context as the current DOM element.
+If extent is not specified, returns the current extent accessor, which defaults to [[0, 0], [width, height]] where width is the client width of the element and height is its client height; for SVG elements, the nearest ancestor SVG element’s viewBox, or width and height attributes, are used. Alternatively, consider using element.getBoundingClientRect.
+The viewport extent affects several functions: the center of the viewport remains fixed during changes by zoom.scaleBy and zoom.scaleTo; the viewport center and dimensions affect the path chosen by d3.interpolateZoom; and the viewport extent is needed to enforce the optional translate extent.
+
+https://github.com/d3/d3-zoom#zoom_scaleExtent
+# zoom.scaleExtent([extent]) · Source
+If extent is specified, sets the scale extent to the specified array of numbers [k0, k1] where k0 is the minimum allowed scale factor and k1 is the maximum allowed scale factor, and returns this zoom behavior. If extent is not specified, returns the current scale extent, which defaults to [0, ∞]. The scale extent restricts zooming in and out. It is enforced on interaction and when using zoom.scaleBy, zoom.scaleTo and zoom.translateBy; however, it is not enforced when using zoom.transform to set the transform explicitly.
+If the user tries to zoom by wheeling when already at the corresponding limit of the scale extent, the wheel events will be ignored and not initiate a zoom gesture. This allows the user to scroll down past a zoomable area after zooming in, or to scroll up after zooming out. If you would prefer to always prevent scrolling on wheel input regardless of the scale extent, register a wheel event listener to prevent the browser default behavior:
+selection
+    .call(zoom)
+    .on("wheel", event => event.preventDefault());
+--------------------------------------
+--------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
