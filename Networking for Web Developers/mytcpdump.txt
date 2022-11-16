@@ -1,0 +1,124 @@
+maxloo@MAXMAC / % printf 'HEAD / HTTP/1.1\r\nHost: example.net\r\n\r\n' | nc example.net 80
+
+HTTP/1.1 200 OK
+Content-Encoding: gzip
+Accept-Ranges: bytes
+Age: 449224
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=UTF-8
+Date: Wed, 16 Nov 2022 08:13:05 GMT
+Etag: "3147526947"
+Expires: Wed, 23 Nov 2022 08:13:05 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECS (oxr/8318)
+X-Cache: HIT
+Content-Length: 648
+
+maxloo@MAXMAC / % printf 'HEAD / HTTP/1.1\r\nHost: example.net\r\n\r\n' | wc       
+       3       5      38
+maxloo@MAXMAC / % 
+
+
+
+
+16:13:05.288439 IP 10.110.2.155.52251 > 93.184.216.34.80: Flags [S], seq 2022822887, win 65535, options [mss 1460,nop,wscale 6,nop,nop,TS val 755582934 ecr 0,sackOK,eol], length 0
+16:13:05.479844 IP 93.184.216.34.80 > 10.110.2.155.52251: Flags [S.], seq 3296737074, ack 2022822888, win 65535, options [mss 1386,sackOK,TS val 2033434295 ecr 755582934,nop,wscale 9], length 0
+16:13:05.479974 IP 10.110.2.155.52251 > 93.184.216.34.80: Flags [.], ack 1, win 2061, options [nop,nop,TS val 755583125 ecr 2033434295], length 0
+16:13:05.487416 IP 10.110.2.155.52251 > 93.184.216.34.80: Flags [P.], seq 1:39, ack 1, win 2061, options [nop,nop,TS val 755583132 ecr 2033434295], length 38: HTTP: HEAD / HTTP/1.1
+16:13:05.487510 IP 10.110.2.155.52251 > 93.184.216.34.80: Flags [F.], seq 39, ack 1, win 2061, options [nop,nop,TS val 755583132 ecr 2033434295], length 0
+16:13:05.490829 IP 93.184.216.34.80 > 10.110.2.155.52251: Flags [.], ack 1, win 2252, options [nop,nop,TS val 2033434295 ecr 755583132,nop,nop,sack 1 {39:39}], length 0
+16:13:05.493385 IP 93.184.216.34.80 > 10.110.2.155.52251: Flags [.], ack 39, win 126, options [nop,nop,TS val 2033434295 ecr 755583132], length 0
+16:13:05.675279 IP 93.184.216.34.80 > 10.110.2.155.52251: Flags [.], ack 39, win 128, options [nop,nop,TS val 2033434489 ecr 755583132], length 0
+16:13:05.675290 IP 93.184.216.34.80 > 10.110.2.155.52251: Flags [P.], seq 1:352, ack 39, win 128, options [nop,nop,TS val 2033434490 ecr 755583132], length 351: HTTP: HTTP/1.1 200 OK
+16:13:05.675397 IP 10.110.2.155.52251 > 93.184.216.34.80: Flags [F.], seq 39, ack 352, win 2055, options [nop,nop,TS val 755583318 ecr 2033434490], length 0
+16:13:05.675540 IP 10.110.2.155.52251 > 93.184.216.34.80: Flags [F.], seq 39, ack 352, win 2055, options [nop,nop,TS val 755583318 ecr 2033434490], length 0
+16:13:05.859830 IP 93.184.216.34.80 > 10.110.2.155.52251: Flags [.], ack 40, win 128, options [nop,nop,TS val 2033434675 ecr 755583318,nop,nop,sack 1 {39:40}], length 0
+16:13:05.859842 IP 93.184.216.34.80 > 10.110.2.155.52251: Flags [F.], seq 352, ack 40, win 128, options [nop,nop,TS val 2033434675 ecr 755583318], length 0
+16:13:05.860023 IP 10.110.2.155.52251 > 93.184.216.34.80: Flags [.], ack 353, win 2055, options [nop,nop,TS val 755583502 ecr 2033434675], length 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+maxloo@MAXMAC / % printf 'HEAD / HTTP/1.1\r\nHost: google.com\r\n\r\n' | nc example.net 80
+
+HTTP/1.1 404 Not Found
+Content-Type: text/html
+Date: Wed, 16 Nov 2022 08:11:33 GMT
+Server: ECS (oxr/8314)
+Content-Length: 345
+
+maxloo@MAXMAC / % 
+
+
+
+
+maxloo@MAXMAC d3js % sudo tcpdump -n host example.net
+Password:
+tcpdump: data link type PKTAP
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on pktap, link-type PKTAP (Apple DLT_PKTAP), capture size 262144 bytes
+16:11:33.638723 IP 10.110.2.155.52228 > 93.184.216.34.80: Flags [S], seq 653954202, win 65535, options [mss 1460,nop,wscale 6,nop,nop,TS val 755491658 ecr 0,sackOK,eol], length 0
+16:11:33.827284 IP 93.184.216.34.80 > 10.110.2.155.52228: Flags [S.], seq 3722189479, ack 653954203, win 65535, options [mss 1386,sackOK,TS val 919640045 ecr 755491658,nop,wscale 9], length 0
+16:11:33.827419 IP 10.110.2.155.52228 > 93.184.216.34.80: Flags [.], ack 1, win 2061, options [nop,nop,TS val 755491846 ecr 919640045], length 0
+16:11:33.847703 IP 10.110.2.155.52228 > 93.184.216.34.80: Flags [P.], seq 1:38, ack 1, win 2061, options [nop,nop,TS val 755491866 ecr 919640045], length 37: HTTP: HEAD / HTTP/1.1
+16:11:33.847846 IP 10.110.2.155.52228 > 93.184.216.34.80: Flags [F.], seq 38, ack 1, win 2061, options [nop,nop,TS val 755491866 ecr 919640045], length 0
+16:11:33.851227 IP 93.184.216.34.80 > 10.110.2.155.52228: Flags [.], ack 1, win 2252, options [nop,nop,TS val 919640045 ecr 755491866,nop,nop,sack 1 {38:38}], length 0
+16:11:34.035306 IP 93.184.216.34.80 > 10.110.2.155.52228: Flags [.], ack 38, win 128, options [nop,nop,TS val 919640254 ecr 755491866], length 0
+16:11:34.035317 IP 93.184.216.34.80 > 10.110.2.155.52228: Flags [P.], seq 1:134, ack 38, win 128, options [nop,nop,TS val 919640255 ecr 755491866], length 133: HTTP: HTTP/1.1 404 Not Found
+16:11:34.035433 IP 10.110.2.155.52228 > 93.184.216.34.80: Flags [F.], seq 38, ack 134, win 2058, options [nop,nop,TS val 755492052 ecr 919640255], length 0
+16:11:34.035608 IP 10.110.2.155.52228 > 93.184.216.34.80: Flags [F.], seq 38, ack 134, win 2058, options [nop,nop,TS val 755492052 ecr 919640255], length 0
+16:11:34.223433 IP 93.184.216.34.80 > 10.110.2.155.52228: Flags [.], ack 39, win 128, options [nop,nop,TS val 919640441 ecr 755492052,nop,nop,sack 1 {38:39}], length 0
+16:11:34.223440 IP 93.184.216.34.80 > 10.110.2.155.52228: Flags [F.], seq 134, ack 39, win 128, options [nop,nop,TS val 919640441 ecr 755492052], length 0
+16:11:34.223537 IP 10.110.2.155.52228 > 93.184.216.34.80: Flags [.], ack 135, win 2058, options [nop,nop,TS val 755492240 ecr 919640441], length 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+maxloo@MAXMAC / % 'HEAD / HTTP/1.1\r\nHost: example.net\r\n\r\n' | nc example.net 80
+zsh: no such file or directory: HEAD / HTTP/1.1\r\nHost: example.net\r\n\r\n
+maxloo@MAXMAC / % 
+
+
+
+
+maxloo@MAXMAC d3js % sudo tcpdump -n host example.net
+Password:
+tcpdump: data link type PKTAP
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on pktap, link-type PKTAP (Apple DLT_PKTAP), capture size 262144 bytes
+16:01:59.505186 IP 10.110.2.155.52045 > 93.184.216.34.80: Flags [S], seq 2813392077, win 65535, options [mss 1460,nop,wscale 6,nop,nop,TS val 754920265 ecr 0,sackOK,eol], length 0
+16:01:59.696773 IP 93.184.216.34.80 > 10.110.2.155.52045: Flags [S.], seq 1822052998, ack 2813392078, win 65535, options [mss 1386,sackOK,TS val 3963077013 ecr 754920265,nop,wscale 9], length 0
+16:01:59.696887 IP 10.110.2.155.52045 > 93.184.216.34.80: Flags [.], ack 1, win 2061, options [nop,nop,TS val 754920456 ecr 3963077013], length 0
+16:01:59.697076 IP 10.110.2.155.52045 > 93.184.216.34.80: Flags [F.], seq 1, ack 1, win 2061, options [nop,nop,TS val 754920456 ecr 3963077013], length 0
+16:01:59.701192 IP 93.184.216.34.80 > 10.110.2.155.52045: Flags [.], ack 2, win 2252, options [nop,nop,TS val 3963077013 ecr 754920456], length 0
+16:01:59.881027 IP 93.184.216.34.80 > 10.110.2.155.52045: Flags [F.], seq 1, ack 2, win 2252, options [nop,nop,TS val 3963077199 ecr 754920456], length 0
+16:01:59.881143 IP 10.110.2.155.52045 > 93.184.216.34.80: Flags [.], ack 2, win 2061, options [nop,nop,TS val 754920637 ecr 3963077199], length 0
+16:02:00.065227 IP 93.184.216.34.80 > 10.110.2.155.52045: Flags [R], seq 1822053000, win 0, length 0
