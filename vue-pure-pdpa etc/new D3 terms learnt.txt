@@ -229,8 +229,96 @@ selection
     .on("wheel", event => event.preventDefault());
 --------------------------------------
 --------------------------------------
+      const link = g.append('g')
+        .attr('fill', 'none')
+        .selectAll('path')
+        .data(nodes.links())
+        .join('path')
+        .attr('stroke', (d) => chooseColors(d.source, ['All', 'Any'], ['red', 'blue']))
+        .attr('stroke-width', 2)
+        .attr('d', d3.linkHorizontal()
+          .x((d) => d.y)
+          .y((d) => d.x))
+        .attr('id', (d, i) => (`path${i + 1}`));
+
+Joining Data
+
+For an introduction to D3’s data joins, see the selection.join notebook. Also see Thinking With Joins.
+
+# selection.data([data[, key]]) · Source, Examples
+
+Binds the specified array of data with the selected elements, returning a new selection that represents the update selection: the elements successfully bound to data. Also defines the enter and exit selections on the returned selection, which can be used to add or remove elements to correspond to the new data. The specified data is an array of arbitrary values (e.g., numbers or objects), or a function that returns an array of values for each group. When data is assigned to an element, it is stored in the property __data__, thus making the data “sticky” and available on re-selection.
+
+The data is specified for each group in the selection. If the selection has multiple groups (such as d3.selectAll followed by selection.selectAll), then data should typically be specified as a function. This function will be evaluated for each group in order, being passed the group’s parent datum (d, which may be undefined), the group index (i), and the selection’s parent nodes (nodes), with this as the group’s parent element.
+
+In conjunction with selection.join (or more explicitly with selection.enter, selection.exit, selection.append and selection.remove), selection.data can be used to enter, update and exit elements to match data. For example, to create an HTML table from a matrix of numbers:
+
+const matrix = [
+  [11975,  5871, 8916, 2868],
+  [ 1951, 10048, 2060, 6171],
+  [ 8010, 16145, 8090, 8045],
+  [ 1013,   990,  940, 6907]
+];
+
+d3.select("body")
+  .append("table")
+  .selectAll("tr")
+  .data(matrix)
+  .join("tr")
+  .selectAll("td")
+  .data(d => d)
+  .join("td")
+    .text(d => d);
+
+In this example the data function is the identity function: for each table row, it returns the corresponding row from the data matrix.
+
+If a key function is not specified, then the first datum in data is assigned to the first selected element, the second datum to the second selected element, and so on. A key function may be specified to control which datum is assigned to which element, replacing the default join-by-index, by computing a string identifier for each datum and element. This key function is evaluated for each selected element, in order, being passed the current datum (d), the current index (i), and the current group (nodes), with this as the current DOM element (nodes[i]); the returned string is the element’s key. The key function is then also evaluated for each new datum in data, being passed the current datum (d), the current index (i), and the group’s new data, with this as the group’s parent DOM element; the returned string is the datum’s key. The datum for a given key is assigned to the element with the matching key. If multiple elements have the same key, the duplicate elements are put into the exit selection; if multiple data have the same key, the duplicate data are put into the enter selection.
+
+For example, given this document:
+
+<div id="Ford"></div>
+<div id="Jarrah"></div>
+<div id="Kwon"></div>
+<div id="Locke"></div>
+<div id="Reyes"></div>
+<div id="Shephard"></div>
+
+You could join data by key as follows:
+
+const data = [
+  {name: "Locke", number: 4},
+  {name: "Reyes", number: 8},
+  {name: "Ford", number: 15},
+  {name: "Jarrah", number: 16},
+  {name: "Shephard", number: 23},
+  {name: "Kwon", number: 42}
+];
+
+d3.selectAll("div")
+  .data(data, function(d) { return d ? d.name : this.id; })
+    .text(d => d.number);
+
+This example key function uses the datum d if present, and otherwise falls back to the element’s id property. Since these elements were not previously bound to data, the datum d is null when the key function is evaluated on selected elements, and non-null when the key function is evaluated on the new data.
+
+The update and enter selections are returned in data order, while the exit selection preserves the selection order prior to the join. If a key function is specified, the order of elements in the selection may not match their order in the document; use selection.order or selection.sort as needed. For more on how the key function affects the join, see A Bar Chart, Part 2 and Object Constancy.
+
+If data is not specified, this method returns the array of data for the selected elements.
+
+This method cannot be used to clear bound data; use selection.datum instead.
+--------------------------------------
+--------------------------------------
+      link
+        .append('textPath')
+        .attr('x', (d) => (d.target.x - d.source.x) / 2)
+        .attr('y', (d) => (d.target.y - d.source.y) / 2)
+        .attr('fill', (d) => chooseColors(d.source, ['All', 'Any'], ['red', 'blue']))
+        .style('text-anchor', 'middle')
+        .attr('href', (d, i) => (`#path${i + 1}`))
+        .text((d) => d.source.data.andOr.nl.en);
 
 
+--------------------------------------
+--------------------------------------
 
 
 
